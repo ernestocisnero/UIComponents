@@ -2,16 +2,17 @@
 
 import SwiftUI
 
-struct SignInScreenUI: View {
+struct SignInScreenView: View {
+    
     @State private var email = ""
     @State private var password = ""
     @State private var isLoading = false
     
     var body: some View {
-        ZStack{
+        ZStack {
             
             LinearGradient(
-                colors:[
+                colors: [
                     Color.black,
                     Color.indigo.opacity(0.9),
                     Color.blue.opacity(0.8)
@@ -22,7 +23,7 @@ struct SignInScreenUI: View {
             .ignoresSafeArea()
             
             Circle()
-                .fill(Color.blue.opacity(0.5))
+                .fill(Color.blue.opacity(0.50))
                 .frame(width: 350)
                 .blur(radius: 120)
                 .offset(x: -140, y: -220)
@@ -33,8 +34,10 @@ struct SignInScreenUI: View {
                 .blur(radius: 120)
                 .offset(x: 160, y: 260)
             
-            VStack(spacing: 36){
-                VStack(spacing: 10){
+            VStack(spacing: 36) {
+                
+                VStack(spacing: 10) {
+                    
                     Image(systemName: "lock.shield.fill")
                         .font(.system(size: 40))
                         .foregroundStyle(.white)
@@ -46,31 +49,40 @@ struct SignInScreenUI: View {
                         .font(.system(size: 32, weight: .bold))
                         .foregroundStyle(.white)
                     
-                   Text("Access your account")
+                    Text("Access your account")
                         .foregroundStyle(.white)
                 }
                 
-                VStack{
-                    GlassInputField(title: "Email", placeholder: "email@email.com", text: $email, icon: "envelope")
+                VStack(spacing: 18) {
                     
-                    GlassSecureField(title: "Password", placeholder: "Enter password", text: $password, icon: "lock")
+                    GlassInputField(
+                        title: "Email",
+                        placeholder: "email@example.com",
+                        text: $email,
+                        icon: "envelope"
+                    )
+                    
+                    GlassSecureField(
+                        title: "Password",
+                        placeholder: "Enter password",
+                        text: $password,
+                        icon: "lock"
+                    )
                 }
                 
                 AnimatedLoginButton(isLoading: $isLoading)
                 
-                Text("Forgot password")
+                Text("Forgot password?")
                     .font(.footnote)
                     .foregroundStyle(.white)
                 
                 Spacer()
             }
             .padding(30)
-            
         }
-        
     }
 }
 
 #Preview {
-    SignInScreenUI()
+    SignInScreenView()
 }
